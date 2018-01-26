@@ -1,0 +1,22 @@
+{
+  "name": "intro-to-es6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src",
+  "scripts": {
+    "dev": "gulp watch"
+  },
+  "keywords": [],
+  "author": "Andrew Usher",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-cli": "^2.0.1",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-stylus": "^2.7.0"
+  }
+}

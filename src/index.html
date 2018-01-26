@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Intro to ES6</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato|Merriweather|Anonymous+Pro" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Intro To ES6</h1>
+    <nav>
+      <li>
+        <a href="#hero">Home</a>
+      </li>
+      <li>
+        <a href="https://github.com/AndrewUsher">Source Code</a>
+      </li>
+      <li>
+        <a href="https://andrewusher.github.io">My Work</a>
+      </li>
+    </nav>
+  </header>
+  <section id="hero">
+    <div id="hero-box">
+      <h2>Learn the fundementals of ES6</h2>
+      <h3>and start using them today</h3>
+    </div>
+  </section>
+  <section id="intro">
+    <div class="container">
+      <h2>About This Mini-Course</h2>
+      <p>This is a short introduction to the new useful ES6 feautures. It is by no means a comprehensive guide to everything
+        introduced in ES6: it's only a primer for people who are unfamiliar with arrow functions, promises, let and const,
+        default parameters, and other new features in ES6.</p>
+    </div>
+  </section>
+  <main>
+    <div class="container">
+      <section class="lesson">
+        <h3>Let and Const</h3>
+        <p>In ES5, there is only one way to declare a new variable: the keyword var. However, that would sometimes lead to issues
+          in the global scope. For example, what would be returned here?</p>
+        <pre><code class="prettyprint">function varScope () {
+var a = 10;
+if (true) {
+   // Changes entire function's a
+  var a = 20; 
+  console.log(a); // > 20
+}
+console.log(a); // > 20</code></pre>
+        <p>This isn't optimal behavior for several reasons. When using var, your variables are alwways in global scope. This
+          allows them to easily be overwritten like this.</p>
+        <p>However, you don't have to worry about global scope with
+          <em>let</em>:</p>
+        <pre><code class="prettyprint">function letScope (){ 
+let b = 10; 
+if (true) { 
+  // is only inside if statement block
+  let b = 20; 
+  console.log(b); // 20
+} 
+console.log(b); // 10 
+}</code></pre>
+        <p>Const is also block-scoped. Variables declared with
+          <em>const</em> cannot directly be reassigned. However, you can still push new values to them:</p>
+        <pre><code class="prettyprint">const colors = [];
+// can still push to array
+colors.push('green');
+colors.push('blue');
+// throws error
+colors = 'pink';</code></pre>
+      </section>
+      <section class="lesson">
+        <h3>Classes and Inheritance</h3>
+        <p>Object oriented keywords are one of the biggest featuures in ES6. Classes are an alternative to the prototype based
+          OO pattern. Classes are just easier to write. Here's an example:</p>
+        <pre><code class="prettyprint">// ES5 code
+function Person (name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.getName = function() {
+  return this.name;
+};
+
+Person.prototype.getAge = function() {
+  return this.age;
+};
+
+var lisa = new Person('Lisa Parks', 22);
+lisa.getName(); // > Lisa Parks
+lisa.getAge(); // > 22</code></pre>
+        <pre><code class="prettyprint">// ES6 code
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  getName() {
+    return this.name;
+  }
+  getAge() {
+    return this.age;
+  }
+}
+
+let tony = new Person('Tony Montana', 34);
+tony.getName(); // > Tony Montana
+tony.getAge(); // > 34
+        </code></pre>
+        <p>The
+          <em>class</em> keyword makes the code a lot simpler to read. The new
+          <em>extends</em> keyword also makes it simple to inherit from other classes:</p>
+        <pre><code class="prettyprint">class Person { 
+  constructor(name, age) { 
+    this.name = name; 
+    this.age = age; 
+  } 
+  getName() { 
+    return this.name; 
+  } 
+  getAge() { 
+    return this.age; 
+  } 
+}
+
+// Inherit from Person class
+class Immortal extends Person {
+  constructor(name, age, weakness) {
+    super(name, age); // properties from inherited class
+    this.weakness = weakness;
+  }
+  getWeakness() {
+    return this.weakness;
+  }
+}
+
+let jonas = new Immortal('Jonas Hill', 131, 'salt');
+jonas.getName(); 
+// > Jonas Hill: Methods from Person still work
+jonas.getWeakness(); // > salt</code></pre>
+      </section>
+      <section class="lesson">
+        <h3>Template Strings</h3>
+        <p>Template strings allow you to seperate your strings onto several lines without concatenating:</p>
+        <pre><code class="prettyprint">// ES5 Code
+let template = 'Hello!' +
+  'The text is on seperate lines, but I needed a ' + 
+  'plus sign'</code></pre>
+        <pre><code class="prettyprint">// ES6 Code
+let template = `
+  Template strings allow you to seperate
+  your code onto seperate lines
+  without concatenating.
+`</code></pre>
+        <p>Template strings also allow you to insert variables and even function calls into your strings without concatenating:</p>
+        <pre><code class="prettyprint">// ES5 code 
+var name = 'Andrew'; 
+function allCapital (word) { 
+  return word.toUpperCase(); 
+} 
+let template = allCapital('hello') + ' ' + name;</code></pre>
+        <pre><code class="prettyprint">// ES6 code
+let name = 'Andrew'; 
+function allCapital(word) { 
+  return word.toUpperCase(); 
+} 
+let template = `${allCapital('hello')}, I'm ${name}`; 
+// > HELLO, I'm Andrew</code></pre>
+      </section>
+      <section class="lesson">
+        <h3>New String and Number Methods</h3>
+        <p>ES6 introduced new methods that make it easier to work with strings and numbers:</p>
+        <h4>New Number Methods</h4>
+        <p>
+          <em>Number.isSafeInteger()</em> checks to see if the number is within the limits of Javascript.</p>
+        <pre><code class="prettyprint">// ES5 Code 
+function isSafeInteger (num) { 
+  return ( typeof num === 'number' 
+           &amp;&amp; Math.round(num) === num 
+           &amp;&amp; -(Math.pow(2, 53) - 1) &lt;= num 
+           &amp;&amp; num &lt;= (Math.pow(2, 53) - 1) 
+          ); 
+} 
+isSafeInteger(42); // > true 
+isSafeInteger(9007199254740992); // > false</code></pre>
+        <pre><code class="prettyprint">// ES6 Code
+Number.isSafeInteger(42); // > true
+Number.isSafeInteger(100075483234740992); // > false</code></pre>
+        <p>
+          <em>Math.trunc()</em> completely drops the decimal part of a number: changing it to an integer:</p>
+        <pre><code class="prettyprint">// ES5 code 
+function mathTrunc (num) { 
+  return ( num &lt; 0 ? 
+           Math.ceil(x) : 
+           Math.floor(x)
+         ); 
+} 
+
+mathTrunc(55.4)) // > 55 
+mathTrunc(0.8)) // > 0 </code></pre>
+        <pre><code class="prettyprint">// ES6 code
+Math.trunc(22.6); // > 22
+Math.trunc(90.999); // > 90</code></pre>
+        <h4>String Methods</h4>
+        <p>ES6 includes new methods for searching within strings. They include
+          <em>startsWith</em>,
+          <em>endsWith</em>, and
+          <em>includes</em>:
+        </p>
+        <pre><code class="prettyprint">// ES5 code
+var string = 'hello' 
+string.indexOf("ello") === 1; // > true
+string.indexOf("hell") === (4 - "hell".length); // > true 
+string.indexOf("ell") !== -1; // > true 
+string.indexOf("ell", 1) !== -1; // > true 
+string.indexOf("ell", 2) !== -1; // > false</code></pre>
+        <pre><code class="prettyprint">// ES6 code
+let string = 'hello';
+string.startsWith("ello", 1) // > true 
+string.endsWith("hell", 4) // > true 
+string.includes("ell") // > true 
+string.includes("ell", 1) // > true 
+string.includes("ell", 2) // > false</code></pre>
+      </section>
+      <section class="lesson">
+        <h3>Default Parameters and Spread Operator</h3>
+        <p>ES6 offers a simple way to include default parameters for functions:</p>
+        <pre><code class="prettyprint">// ES5 Code
+function add (a, b, c) { 
+  if (b === undefined) b = 8; 
+  if (c === undefined) c = 10; 
+  return x + y + z; 
+}
+
+add(3); // > 21</code></pre>
+        <pre><code class="prettyprint">// ES6 Code
+function add (a, b = 8, c = 10) { 
+  return a + b + c; 
+}
+
+add(3); // > 21</code></pre>
+        <p>The spread operator allows you to seperate elements of objects, arrays, or strings into literal elements as well
+          as individual function parameters:</p>
+        <pre><code class="prettyprint">// ES5 code 
+let params = [ "hello", true, 7 ]; 
+var other = [ 1, 2, ...params ]; 
+// > [ 1, 2, "hello", true, 7 ] 
+function a (a, b, ...c) { 
+  return ( + b) * c.length; 
+} 
+a(1, 2, ...params); // > 9
+let string = "foo"; 
+var chars = [ ...string ]; // > [ "f", "o", "o" ]</code></pre>
+      </section>
+      <section class="lesson">
+        <h3>Arrow Functions</h3>
+        <p>And last but not least,
+          <em>arrow functions</em>! They make your code easier to read in addition to simplifying function scoping and the
+          <em>this</em> keyword. Benefits of using the arrow function include:</p>
+        <ul>
+          <li>more expressive closure syntax</li>
+          <li>simpler statement bodies, and</li>
+          <li>simpler handling of current object context</li>
+        </ul>
+        <pre><code class="prettyprint">// ES5 code
+this.nums.forEach(function (num) { 
+  if (v % 5 === 0) 
+    this.fives.push(num);
+}, this);</code></pre>
+        <pre><code class="prettyprint">// ES6 code
+this.nums.forEach((num) => { 
+  if (num % 5 === 0) 
+    this.fives.push(num); 
+});</code></pre>
+      </section>
+      <section id="outro">
+        <h3>What's Next?</h3>
+        <p>Now you should have a grasp on some of the new features introduced in ES6. If you still want to learn more, you can
+          check out MDN, ES6 Features, or an ES6 course by Wes Bos</p>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
